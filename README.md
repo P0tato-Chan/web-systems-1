@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        Hello World!
-    </head>
-    <body>
-        <!-- the content goes here -->
-    </body>
-</html>
