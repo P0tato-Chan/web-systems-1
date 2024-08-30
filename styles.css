@@ -28,8 +28,6 @@ footer {
     	padding: 10px 0;
     	width: 100%;
 }
-a:link {
+a {
   color: black;
-  background-color: transparent;
-  text-decoration: underline;
 }
