@@ -3,6 +3,7 @@ body {
     	margin: 0;
    	padding: 0;
 	text-align: center;
+	background-color: #727272;
 }
 
 header {
@@ -14,7 +15,7 @@ header {
 }
 
 main {
-	background-color: #727272;
+	
     	padding: 20px;
 }
 
