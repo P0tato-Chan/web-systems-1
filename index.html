@@ -13,10 +13,10 @@
     <div class="navbar">
          <a href="index.html" style="display: block;">Home</a>
          <div class="dropdown">
-             <button class="dropbtn">Web systems 1 
+             <button class="dropbtn" onclick="dropdown()">Web systems 1 
                  <i class="fa fa-caret-down"></i>
              </button>
-             <div class="dropdown-content">
+             <div class="dropdown-content" id="myDropdown">
                  <a href="assignment2.html" style="margin-top: 20px; display: block;">Assignment2</a>
                  <a href="#">Link 2</a>
                  <a href="#">Link 3</a>
@@ -29,5 +29,22 @@
     <footer>
         <p>Created by Renzie Davidson for ​COP ​4813​ 521F</p>
     </footer>
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function dropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
 </body>
 </html>
