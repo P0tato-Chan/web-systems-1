@@ -30,16 +30,16 @@ footer {
     	width: 100%;
 }
 
-.dropdown {
+dropdown {
   display: inline-block;
   position: relative;
 }
-.dropdown-options {
+dropdown-options {
   display: none;
   position: absolute;
   overflow: auto;
 }
 
-.dropdown:hover .dropdown-options {
+dropdown:hover dropdown-options {
   display: block;
 }
