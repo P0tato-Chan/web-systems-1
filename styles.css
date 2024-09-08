@@ -32,6 +32,7 @@ footer {
 .navbar {
   overflow: hidden;
   background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar a {
@@ -49,6 +50,7 @@ footer {
 }
 
 .dropdown .dropbtn {
+  cursor: pointer;
   font-size: 16px;  
   border: none;
   outline: none;
@@ -59,7 +61,7 @@ footer {
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
   background-color: red;
 }
 
@@ -85,6 +87,6 @@ footer {
   background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-content {
+.show {
   display: block;
 }
