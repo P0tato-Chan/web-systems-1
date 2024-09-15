@@ -5,94 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .error { color: red; }
+    </style>
 </head>
 <body>
-     <div class="navbar">
-         <a href="index.html" style="display: block;">Home</a>
-         <div class="dropdown">
-             <button class="dropbtn" onclick="dropdown()">Web systems 1 
-                 <i class="fa fa-caret-down"></i>
-             </button>
-             <div class="dropdown-content" id="myDropdown">
-                 <a href="assignment2.html" style="margin-top: 20px; display: block;">Assignment2</a>
-                 <a href="assignment3.html" style="margin-top: 20px; display: block;">Assignment3</a>
-             </div>
-         </div>
+    <div class="navbar">
+        <a href="index.html" style="display: block;">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="dropdown()">Web systems 1 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="assignment2.html" style="margin-top: 20px; display: block;">Assignment2</a>
+                <a href="assignment3.html" style="margin-top: 20px; display: block;">Assignment3</a>
+            </div>
+        </div>
     </div>
-<div>
-  document.getElementById("email").innerHTML=localStorage.getItem("email");
-  document.getElementById("fname").innerHTML=localStorage.getItem("fname");
-  document.getElementById("lname").innerHTML=localStorage.getItem("lname");
-  document.getElementById("phone").innerHTML=localStorage.getItem("phone");
-  document.getElementById("dob").innerHTML=localStorage.getItem("dob");
-  document.getElementById("address").innerHTML=localStorage.getItem("address");
-  document.getElementById("city").innerHTML=localStorage.getItem("city");
-  document.getElementById("state").innerHTML=localStorage.getItem("state");
-  document.getElementById("zip").innerHTML=localStorage.getItem("zip");
-  document.getElementById("message").innerHTML=localStorage.getItem("message");
-</div>
-<form action="mailto:renzie_davidson@daytonastate.edu" method="post" enctype="text/plain" >
-  <table>
-    <tr>
-      <td align="left"><label for="fname">First name:</label></td>
-      <td align="left"><label for="lname">Last name:</label></td>
-    </tr>
-    <tr>
-      <td align="left"><input type="text" name="first" VALUE="fname"/></td>
-      <td align="left"><input type="text" name="last" /VALUE="lname"></td>
-    </tr>
-    <tr>
-      <td align="left"><label for="phone">Phone:</label></td>
-      <td align="left"><label for="email">Email:</label></td>
-    </tr>
-    <tr>
-      <td align="left"><input type="text" name="phone" VALUE="phone"/></td>
-      <td align="left"><input type="text" name="email" VALUE="email"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="dob">DOB (mm/dd/yy):</label></td>
-      <td align="left"><input type="text" name="dob" VALUE="dob"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="address">Address:</label></td>
-      <td align="left"><input type="text" name="address" VALUE="address"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="city">City:</label></td>
-      <td align="left"><input type="text" name="city" VALUE="city"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="state">State:</label></td>
-      <td align="left"><input type="text" name="state" VALUE="state"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="zip">Zip:</label></td>
-      <td align="left"><input type="text" name="zip" VALUE="zip"/></td>
-    </tr>
-    <tr>
-      <td align="right"><label for="message">Message:</label></td>
-      <td><textarea id="message" name="message" rows="5" cols="33" placeholder=message ></textarea></td>
-    </tr>
-    <tr>
-        <td align="right"><label for="checkbox">Confirm your not a robot:</label></td>
-        <td><input type="checkbox" id="check" name="check" ></td>
-    </tr>
-  </table>
-</form>
-  <input type="submit" name="submit" value="Submit">
-<script>
-    function dropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
-  }
-}
-</script>
+    <form id="myForm" action="mailto:renzie_davidson@daytonastate.edu" method="post" enctype="text/plain">
+        <table>
+            <tr>
+                <td align="left"><label for="fname">First name:</label></td>
+                <td align="left"><label for="lname">Last name:</label></td>
+            </tr>
+            <tr>
+                <td align="left"><input type="text" id="fname" name="first" required /></td>
+                <td align="left"><input type="text" id="lname" name="last" required /></td>
+            </tr>
+            <tr>
+                <td align="left"><label for="phone">Phone:</label></td>
+                <td align="left"><label for="email">Email:</label></td>
+            </tr>
+            <tr>
+                <td align="left"><input type="tel" id="phone" name="phone" pattern="\d{10}" title="Phone number must be 10 digits." required /></td>
+                <td align="left"><input type="email" id="email" name="email" required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="dob">DOB (mm/dd/yy):</label></td>
+                <td align="left"><input type="text" id="dob" name="dob" pattern="\d{2}/\d{2}/\d{2}" title="Date of birth must be in the format mm/dd/yy." required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="address">Address:</label></td>
+                <td align="left"><input type="text" id="address" name="address" required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="city">City:</label></td>
+                <td align="left"><input type="text" id="city" name="city" required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="state">State:</label></td>
+                <td align="left"><input type="text" id="state" name="state" pattern="[A-Z]{2}" title="State must be a 2-letter abbreviation." required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="zip">Zip:</label></td>
+                <td align="left"><input type="text" id="zip" name="zip" pattern="\d{5}" title="Zip code must be 5 digits." required /></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="message">Message:</label></td>
+                <td><textarea id="message" name="message" rows="5" cols="33" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function dropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+            if (!e.target.matches('.dropbtn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+
+        // Populate form fields with data from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("fname").value = localStorage.getItem("fname") || "";
+            document.getElementById("lname").value = localStorage.getItem("lname") || "";
+            document.getElementById("phone").value = localStorage.getItem("phone") || "";
+            document.getElementById("email").value = localStorage.getItem("email") || "";
+            document.getElementById("dob").value = localStorage.getItem("dob") || "";
+            document.getElementById("address").value = localStorage.getItem("address") || "";
+            document.getElementById("city").value = localStorage.getItem("city") || "";
+            document.getElementById("state").value = localStorage.getItem("state") || "";
+            document.getElementById("zip").value = localStorage.getItem("zip") || "";
+            document.getElementById("message").value = localStorage.getItem("message") || "";
+        });
+
+        // Remove unnecessary checkbox validation
+        document.getElementById('myForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Submit the form if validation passes
+            this.submit();
+        }
+    </script>
 </body>
+</html>
