@@ -29,6 +29,13 @@ footer {
     	width: 100%;
 }
 
+form {
+    	text-align: left;
+	color: black;
+    	padding: 30px 0;
+    	width: 100%;
+}
+
 .navbar {
   overflow: hidden;
   background-color: #333;
