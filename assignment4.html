@@ -62,7 +62,7 @@ toggle between hiding and showing the dropdown content */
         var xMax = document.getElementById('xMax').value;
         var xVal = [];
         var yVal = [];
-        for (var x = xMin; x <= xMax; x+0.5) {
+        for (var x = xMin; x <= xMax; x+=0.5) {
           yVal.push(a * x ** 3 + b * x ** 2 + c);
           xVal.push(x);
         }
