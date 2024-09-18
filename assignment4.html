@@ -1,0 +1,84 @@
+<body>
+
+</body>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Graph aX^3 + bX^2 + c</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block;">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block;">Assignment2</a>
+          <a href="assignment3.html" style="margin-top: 20px; display: block;">Assignment3</a>
+        </div>
+      </div>
+    </div>
+    a: <input type="text" id="a" value="2">
+    b: <input type="text" id="b" value="2">
+    c: <input type="text" id="c" value="2">
+    xMin: <input type="text" id="xMin" value="-10">
+    xMax: <input type="text" id="xMax" value="10">
+    <input type="button" value="Calculate" id="plot" onclick="plot()" />
+    <div id='myDiv'>
+      <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+    <script>
+      /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+      function dropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
+        }
+      }
+
+      function plot() {
+        var a = document.getElementById('a').value
+        var b = document.getElementById('b').value
+        var c = document.getElementById('c').value
+        var xMin = document.getElementById('xMin').value
+        var xMax = document.getElementById('xMax').value
+        var xVal = [];
+        var yVal = [];
+        for (var x = xMin; x <= xMax; x++) {
+          yVal.push(a*(x**3) + b*(x**2) + c);
+          xVal.push(x);
+          console.log(yVal)
+        }
+        var trace1 = {
+          x: xVal,
+          y: yVal,
+          type: 'scatter'
+        };
+
+        var data = [trace1];
+
+        Plotly.newPlot('myDiv', data);
+      }
+
+    </script>
+  </body>
+
+</html>
