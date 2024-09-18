@@ -35,7 +35,7 @@
     xMin: <input type="text" id="xMin" value="-2">
     xMax: <input type="text" id="xMax" value="2">
     <input type="button" value="Calculate" id="plot" onclick="plot()" />
-    <div id='myDiv'>
+    <div id='myDiv' class="card-body d-flex align-items-center justify-content-center">
     </div>
     <script>
       /* When the user clicks on the button, 
@@ -76,8 +76,8 @@ toggle between hiding and showing the dropdown content */
 
         var layout = {
           autosize: false,
-          width: 500,
-          height: 500,
+          width: 1000,
+          height: 1000,
         }
 
         Plotly.newPlot('myDiv', data, layout);
