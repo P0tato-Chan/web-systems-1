@@ -56,17 +56,16 @@ toggle between hiding and showing the dropdown content */
       }
 
       function plot() {
-        var a = document.getElementById('a').value
-        var b = document.getElementById('b').value
-        var c = document.getElementById('c').value
-        var xMin = document.getElementById('xMin').value
-        var xMax = document.getElementById('xMax').value
+        var a = parseInt(document.getElementById('a').value);
+        var b = parseInt(document.getElementById('b').value);
+        var c = parseInt(document.getElementById('c').value);
+        var xMin = document.getElementById('xMin').value;
+        var xMax = document.getElementById('xMax').value;
         var xVal = [];
         var yVal = [];
         for (var x = xMin; x <= xMax; x++) {
-          yVal.push(a*(x**3) + b*(x**2) + c);
+          yVal.push(a * x ** 3 + b * x ** 2 + c);
           xVal.push(x);
-          console.log(yVal)
         }
         var trace1 = {
           x: xVal,
