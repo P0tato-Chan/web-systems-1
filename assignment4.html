@@ -74,7 +74,13 @@ toggle between hiding and showing the dropdown content */
 
         var data = [trace1];
 
-        Plotly.newPlot('myDiv', data);
+        var layout = {
+          autosize: false,
+          width: 500,
+          height: 500,
+        }
+
+        Plotly.newPlot('myDiv', data, layout);
       }
 
     </script>
