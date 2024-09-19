@@ -58,11 +58,11 @@ toggle between hiding and showing the dropdown content */
         var a = parseInt(document.getElementById('a').value);
         var b = parseInt(document.getElementById('b').value);
         var c = parseInt(document.getElementById('c').value);
-        var xMin = document.getElementById('xMin').value;
-        var xMax = document.getElementById('xMax').value;
+        var xMin = parseInt(document.getElementById('xMin').value);
+        var xMax = parseInt(document.getElementById('xMax').value);
         var xVal = [];
         var yVal = [];
-        for (var x = xMin; x <= xMax; x+=0.5) {
+        for (var x = xMin; x <= xMax; x+=0.1) {
           yVal.push(a * x ** 3 + b * x ** 2 + c);
           xVal.push(x);
         }
