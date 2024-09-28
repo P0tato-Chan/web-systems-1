@@ -1,121 +1,157 @@
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignments</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
-  <style>
-    .container {
-      display: flex;
-      align-items: flex-start; /* Aligns items to the top */
-    }
-
-    .controls {
-      margin-right: 20px; /* Adds some space between controls and canvas */
-    }
-  </style>
-</head>
-<header>
-  <h1>Spirograph</h1>
-</header>
-<div class="navbar">
-  <a href="index.html" style="display: block;">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn" onclick="dropdown()">Web systems 1
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content" id="myDropdown">
-      <a href="assignment2.html" style="margin-top: 20px; display: block;">Assignment2</a>
-      <a href="assignment3.html" style="margin-top: 20px; display: block;">Assignment3</a>
-      <a href="assignment4.html" style="margin-top: 20px; display: block;">Assignment4</a>
-      <a href="assignment5.html" style="margin-top: 20px; display: block;">Assignment5</a>
-    </div>
-  </div>
-</div>
-<body>
-  <div class="container">
-<div class="controls">
-  <label for="R">Radius of Outer Circle (R) (>0):</label>
-  <input type="number" id="R" value="100" min="1" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);" /><br />
-  
-  <label for="r">Radius of Rotating Circle (r) (>0):</label>
-  <input type="number" id="r" value="50" min="1" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);" /><br />
-  
-  <label for="O">Pen Offset (O) (>=0):</label>
-  <input type="number" id="O" value="25" min="0" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 0);" /><br />
-  
-  <label for="speed">Drawing Speed:</label>
-  <input type="range" id="speed" min="1" max="20" value="5" />
-  <span id="speedValue">5</span><br />
-      <button id="drawButton" onclick="drawSpirograph()">Draw Spirograph</button>
-    </div>
-    <canvas id="sproCanvas" width="800" height="800"></canvas>
-  </div>
-
-  <script>
-    function dropdown() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function (e) {
-      if (!e.target.matches('.dropbtn')) {
-        var myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains('show')) {
-          myDropdown.classList.remove('show');
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <style>
+      .container {
+        display: flex;
+        align-items: flex-start;
       }
-    }
 
-    const canvas = document.getElementById("sproCanvas")
-    const ctx = canvas.getContext("2d")
+      .controls {
+        margin-right: 30px;
+      }
+    </style>
+  </head>
+  <header>
+    <h1>Spirograph</h1>
+  </header>
+  <div class="navbar">
+    <a href="index.html" style="display: block">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="dropdown()">
+        Web systems 1
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="assignment2.html" style="margin-top: 20px; display: block"
+          >Assignment2</a
+        >
+        <a href="assignment3.html" style="margin-top: 20px; display: block"
+          >Assignment3</a
+        >
+        <a href="assignment4.html" style="margin-top: 20px; display: block"
+          >Assignment4</a
+        >
+        <a href="assignment5.html" style="margin-top: 20px; display: block"
+          >Assignment5</a
+        >
+      </div>
+    </div>
+  </div>
+  <body>
+    <div class="container">
+      <div class="controls">
+        <label for="R">Radius of Outer Circle (R) (>0):</label>
+        <input
+          type="number"
+          id="R"
+          value="100"
+          min="1"
+          oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);"
+        /><br />
 
-    let currentPoint = 0
-    const numPoints = 1000 // Total number of points to draw
-    let speed = 5 // Points to draw per interval
-    let drawing = false
+        <label for="r">Radius of Rotating Circle (r) (R>r>0): </label>
+        <input
+          type="number"
+          id="r"
+          value="50"
+          min="1"
+          oninput="checkR(); if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);"
+        /><br />
 
-    function drawSpirograph() {
-      const R = Math.max(1, parseFloat(document.getElementById("R").value)); // Minimum 1
-  		const r = Math.max(1, parseFloat(document.getElementById("r").value)); // Minimum 1
-  		const O = Math.max(0, parseFloat(document.getElementById("O").value));
-      ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear previous drawing
-      ctx.beginPath()
-      currentPoint = 0 // Reset current point
-      drawing = true // Start drawing
+        <label for="O">Pen Offset (O) (>=0):</label>
+        <input
+          type="number"
+          id="O"
+          value="25"
+          min="0"
+          oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 0);"
+        /><br />
 
-      function drawNextPoints() {
-        const maxPoints = Math.min(currentPoint + speed, numPoints)
-        for (; currentPoint < maxPoints; currentPoint++) {
-          const t = (currentPoint / numPoints) * (Math.PI * 10)
-          const x =
-            (R + r) * Math.cos(t) - (r + O) * Math.cos(((R + r) / r) * t)
-          const y =
-            (R + r) * Math.sin(t) - (r + O) * Math.sin(((R + r) / r) * t)
-          ctx.lineTo(x + canvas.width / 2, y + canvas.height / 2)
-        }
-        ctx.strokeStyle = "blue"
-        ctx.lineWidth = 2
-        ctx.stroke()
+        <label for="speed">Drawing Speed:</label>
+        <input type="range" id="speed" min="1" max="20" value="5" />
+        <span id="speedValue">5</span><br />
+        <button id="drawButton" onclick="drawSpirograph()">
+          Draw Spirograph
+        </button>
+      </div>
+      <canvas id="sproCanvas" width="800" height="800"></canvas>
+    </div>
 
-        if (currentPoint < numPoints) {
-          requestAnimationFrame(drawNextPoints)
-        } else {
-          drawing = false
+    <script>
+      function dropdown() {
+        document.getElementById("myDropdown").classList.toggle("show")
+      }
+
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          var myDropdown = document.getElementById("myDropdown")
+          if (myDropdown.classList.contains("show")) {
+            myDropdown.classList.remove("show")
+          }
         }
       }
 
-      drawNextPoints()
-    }
+      function checkR() {
+        const R = parseFloat(document.getElementById("R").value)
+        const rInput = document.getElementById("r")
+        const rValue = parseFloat(rInput.value)
 
+        if (rValue > R) {
+          rInput.value = R
+        }
+      }
 
+      const canvas = document.getElementById("sproCanvas")
+      const ctx = canvas.getContext("2d")
 
-    const speedInput = document.getElementById("speed")
-    const speedValueDisplay = document.getElementById("speedValue")
-    speedInput.addEventListener("input", () => {
-      speedValueDisplay.textContent = speedInput.value
-    })
-  </script>
-</body>
+      let currentPoint = 0
+      const numPoints = 1000
+      let speed = 5
+      let drawing = false
+
+      function drawSpirograph() {
+        const R = Math.max(1, parseFloat(document.getElementById("R").value))
+        const r = Math.max(1, parseFloat(document.getElementById("r").value))
+        const O = Math.max(0, parseFloat(document.getElementById("O").value))
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.beginPath()
+        currentPoint = 0
+        drawing = true
+
+        function drawNextPoints() {
+          const maxPoints = Math.min(currentPoint + speed, numPoints)
+          for (; currentPoint < maxPoints; currentPoint++) {
+            const t = (currentPoint / numPoints) * (Math.PI * 10)
+            const x =
+              (R + r) * Math.cos(t) - (r + O) * Math.cos(((R + r) / r) * t)
+            const y =
+              (R + r) * Math.sin(t) - (r + O) * Math.sin(((R + r) / r) * t)
+            ctx.lineTo(x + canvas.width / 2, y + canvas.height / 2)
+          }
+          ctx.strokeStyle = "blue"
+          ctx.lineWidth = 2
+          ctx.stroke()
+
+          if (currentPoint < numPoints) {
+            requestAnimationFrame(drawNextPoints)
+          } else {
+            drawing = false
+          }
+        }
+
+        drawNextPoints()
+      }
+
+      const speedInput = document.getElementById("speed")
+      const speedValueDisplay = document.getElementById("speedValue")
+      speedInput.addEventListener("input", () => {
+        speedValueDisplay.textContent = speedInput.value
+      })
+    </script>
+  </body>
 </html>
