@@ -36,17 +36,20 @@
 </div>
 <body>
   <div class="container">
-    <div class="controls">
-      <label for="R">Radius of Outer Circle (R):</label>
-      <input type="number" id="R" value="100" min="1" /><br />
-      <label for="r">Radius of Rotating Circle (r):</label>
-      <input type="number" id="r" value="50" min="1" /><br />
-      <label for="O">Pen Offset (O):</label>
-      <input type="number" id="O" value="25" min="0" /><br />
-      <label for="speed">Drawing Speed:</label>
-      <input type="range" id="speed" min="1" max="20" value="5" />
-      <span id="speedValue">5</span><br />
-      <button id="drawButton">Draw Spirograph</button>
+<div class="controls">
+  <label for="R">Radius of Outer Circle (R) (>0):</label>
+  <input type="number" id="R" value="100" min="1" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);" /><br />
+  
+  <label for="r">Radius of Rotating Circle (r) (>0):</label>
+  <input type="number" id="r" value="50" min="1" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 1);" /><br />
+  
+  <label for="O">Pen Offset (O) (>=0):</label>
+  <input type="number" id="O" value="25" min="0" oninput="if (this.value === '') this.value = ''; else this.value = Math.max(this.value, 0);" /><br />
+  
+  <label for="speed">Drawing Speed:</label>
+  <input type="range" id="speed" min="1" max="20" value="5" />
+  <span id="speedValue">5</span><br />
+      <button id="drawButton" onclick="drawSpirograph()">Draw Spirograph</button>
     </div>
     <canvas id="sproCanvas" width="800" height="800"></canvas>
   </div>
@@ -74,10 +77,9 @@
     let drawing = false
 
     function drawSpirograph() {
-      const R = parseFloat(document.getElementById("R").value)
-      const r = parseFloat(document.getElementById("r").value)
-      const O = parseFloat(document.getElementById("O").value)
-      speed = parseInt(document.getElementById("speed").value)
+      const R = Math.max(1, parseFloat(document.getElementById("R").value)); // Minimum 1
+  		const r = Math.max(1, parseFloat(document.getElementById("r").value)); // Minimum 1
+  		const O = Math.max(0, parseFloat(document.getElementById("O").value));
       ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear previous drawing
       ctx.beginPath()
       currentPoint = 0 // Reset current point
@@ -107,9 +109,7 @@
       drawNextPoints()
     }
 
-    document.getElementById("drawButton").addEventListener("click", () => {
-      drawSpirograph()
-    })
+
 
     const speedInput = document.getElementById("speed")
     const speedValueDisplay = document.getElementById("speedValue")
