@@ -18,20 +18,28 @@
         <h1>Tetris Leaderboard</h1>
     </header>
     <div class="navbar">
-        <a href="index.html" style="display: block">Home</a>
-        <div class="dropdown">
-            <button class="dropbtn" onclick="dropdown()">
-                Web systems 1
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content" id="myDropdown">
-                <a href="assignment2.html" style="margin-top: 20px;">Assignment 2</a>
-                <a href="assignment3.html" style="margin-top: 20px;">Assignment 3</a>
-                <a href="assignment4.html" style="margin-top: 20px;">Assignment 4</a>
-                <a href="assignment5.html" style="margin-top: 20px;">Assignment 5</a>
-            </div>
-        </div>
+    <a href="index.html" style="display: block">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="dropdown()">
+        Web systems 1
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="assignment2.html" style="margin-top: 20px; display: block"
+          >Assignment2</a
+        >
+        <a href="assignment3.html" style="margin-top: 20px; display: block"
+          >Assignment3</a
+        >
+        <a href="assignment4.html" style="margin-top: 20px; display: block"
+          >Assignment4</a
+        >
+        <a href="assignment5.html" style="margin-top: 20px; display: block"
+          >Assignment5</a
+        >
+      </div>
     </div>
+  </div>
     <table>
         <thead>
             <tr>
@@ -44,17 +52,17 @@
     </table>
     <script>
         function dropdown() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
+        document.getElementById("myDropdown").classList.toggle("show")
+      }
 
-        window.onclick = function(e) {
-            if (!e.target.matches(".dropbtn")) {
-                var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains("show")) {
-                    myDropdown.classList.remove("show");
-                }
-            }
-        };
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          var myDropdown = document.getElementById("myDropdown")
+          if (myDropdown.classList.contains("show")) {
+            myDropdown.classList.remove("show")
+          }
+        }
+      }
 
         // Fetch JSON data and populate the table
         fetch("./tetris.json")
