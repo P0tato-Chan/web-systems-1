@@ -1,82 +1,89 @@
-<body></body>
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignments</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-      th,
-      td {
-        padding: 15px;
-      }
+        th, td {
+            padding: 15px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+        }
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
     </style>
-  </head>
-
-  <body>
+</head>
+<body>
     <header>
-      <h1>Tetris Leaderboard</h1>
+        <h1>Tetris Leaderboard</h1>
     </header>
     <div class="navbar">
-      <a href="index.html" style="display: block">Home</a>
-      <div class="dropdown">
-        <button class="dropbtn" onclick="dropdown()">
-          Web systems 1
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-          <a href="assignment2.html" style="margin-top: 20px; display: block"
-            >Assignment2</a
-          >
-          <a href="assignment3.html" style="margin-top: 20px; display: block"
-            >Assignment3</a
-          >
-          <a href="assignment4.html" style="margin-top: 20px; display: block"
-            >Assignment4</a
-          >
-          <a href="assignment5.html" style="margin-top: 20px; display: block"
-            >Assignment5</a
-          >
+        <a href="index.html" style="display: block">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="dropdown()">
+                Web systems 1
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="assignment2.html" style="margin-top: 20px;">Assignment 2</a>
+                <a href="assignment3.html" style="margin-top: 20px;">Assignment 3</a>
+                <a href="assignment4.html" style="margin-top: 20px;">Assignment 4</a>
+                <a href="assignment5.html" style="margin-top: 20px;">Assignment 5</a>
+            </div>
         </div>
-      </div>
     </div>
     <table>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-      <tbody id="table_body"></tbody>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="table_body"></tbody>
     </table>
     <script>
-      /* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-      function dropdown() {
-        document.getElementById("myDropdown").classList.toggle("show")
-      }
-
-      // Close the dropdown if the user clicks outside of it
-      window.onclick = function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          var myDropdown = document.getElementById("myDropdown")
-          if (myDropdown.classList.contains("show")) {
-            myDropdown.classList.remove("show")
-          }
+        function dropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
         }
-      }
 
-      import tableData from "tetris.json"
+        window.onclick = function(e) {
+            if (!e.target.matches(".dropbtn")) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains("show")) {
+                    myDropdown.classList.remove("show");
+                }
+            }
+        };
 
-      var tableBody = document.getElementById("table_body")
-
-      tableData.forEach((data) => {
-        tableBody.innerHTML += `<tr>
-              <td>${data.Rank}</td>
-              <td>${data.Name}</td>
-              <td>${data.Score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-          </tr>`
-      })
+        // Fetch JSON data and populate the table
+        fetch("./tetris.json")
+            .then(response => response.json())
+            .then(tableData => {
+                var tableBody = document.getElementById("table_body");
+                tableData.forEach(data => {
+                    tableBody.innerHTML += `
+                        <tr>
+                            <td>${data.Rank}</td>
+                            <td>${data.Name}</td>
+                            <td>${data.Score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        </tr>`;
+                });
+            })
+            .catch(error => console.error('Error loading JSON data:', error));
     </script>
-  </body>
+</body>
 </html>
