@@ -1,0 +1,82 @@
+<body></body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      th,
+      td {
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Tetris Leaderboard</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+        </div>
+      </div>
+    </div>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <tbody id="table_body"></tbody>
+    </table>
+    <script>
+      /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+      function dropdown() {
+        document.getElementById("myDropdown").classList.toggle("show")
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          var myDropdown = document.getElementById("myDropdown")
+          if (myDropdown.classList.contains("show")) {
+            myDropdown.classList.remove("show")
+          }
+        }
+      }
+
+      import tableData from "tetris.json"
+
+      var tableBody = document.getElementById("table_body")
+
+      tableData.forEach((data) => {
+        tableBody.innerHTML += `<tr>
+              <td>${data.Rank}</td>
+              <td>${data.Name}</td>
+              <td>${data.Score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+          </tr>`
+      })
+    </script>
+  </body>
+</html>
