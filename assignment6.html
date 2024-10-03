@@ -1,63 +1,68 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignments</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
-        th, td {
-            text-align: left;
-            padding: 20px;
-            border-bottom: 1px solid;
-        }
-        tr:nth-child(even) {
-          background-color: #d8d8d8; /* Background color for even rows */
-        }
-        .grid-container {
-          column-gap: 0px;
-        }
+      th, td {
+        text-align: left;
+        padding: 20px;
+        border-bottom: 1px solid;
+      }
+      tr:nth-child(even) {
+        background-color: #d8d8d8; /* Background color for even rows */
+      }
+      table {
+        border-collapse: separate;
+        border-spacing: 0px;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Tetris Leaderboard</h1>
+      <h1>Tetris Leaderboard</h1>
     </header>
     <div class="navbar">
-    <a href="index.html" style="display: block">Home</a>
-    <div class="dropdown">
-      <button class="dropbtn" onclick="dropdown()">
-        Web systems 1
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content" id="myDropdown">
-        <a href="assignment2.html" style="margin-top: 20px; display: block"
-          >Assignment2</a
-        >
-        <a href="assignment3.html" style="margin-top: 20px; display: block"
-          >Assignment3</a
-        >
-        <a href="assignment4.html" style="margin-top: 20px; display: block"
-          >Assignment4</a
-        >
-        <a href="assignment5.html" style="margin-top: 20px; display: block"
-          >Assignment5</a
-        >
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+        </div>
       </div>
     </div>
-  </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody id="table_body"></tbody>
+    <table class="center">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="table_body"></tbody>
     </table>
     <script>
-        function dropdown() {
+      function dropdown() {
         document.getElementById("myDropdown").classList.toggle("show")
       }
 
@@ -70,21 +75,21 @@
         }
       }
 
-        // Fetch JSON data and populate the table
-        fetch("./tetris.json")
-            .then(response => response.json())
-            .then(tableData => {
-                var tableBody = document.getElementById("table_body");
-                tableData.forEach(data => {
-                    tableBody.innerHTML += `
+      // Fetch JSON data and populate the table
+      fetch("./tetris.json")
+        .then((response) => response.json())
+        .then((tableData) => {
+          var tableBody = document.getElementById("table_body")
+          tableData.forEach((data) => {
+            tableBody.innerHTML += `
                         <tr>
                             <td>${data.Rank}</td>
                             <td>${data.Name}</td>
                             <td>${data.Score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        </tr>`;
-                });
-            })
-            .catch(error => console.error('Error loading JSON data:', error));
+                        </tr>`
+          })
+        })
+        .catch((error) => console.error("Error loading JSON data:", error))
     </script>
-</body>
+  </body>
 </html>
