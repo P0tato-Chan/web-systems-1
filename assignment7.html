@@ -118,7 +118,7 @@ function dealCard() {
     const centerX = spawnAreaRect.left + (spawnAreaRect.width - cardWidth) / 2;
     const centerY = spawnAreaRect.top + (spawnAreaRect.height - cardHeight) / 2;
     
-    img.src = "https://cop4813eaglin.pbworks.com/f/" + cardsInDeck[Math.floor(Math.random() * numberOfCardsInDeck)] + ".png";
+    img.src = cardsInDeck[Math.floor(Math.random() * numberOfCardsInDeck)] + ".png";
 
     card.style.left = `${centerX}px`;
     card.style.top = `${centerY}px`;
