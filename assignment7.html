@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <style>
+      #card {
+        width: 100px;
+        height: 140px;
+        position: absolute;
+        cursor: move;
+        display: none; /* Initially hidden */
+        z-index: 1000; /* Ensure the card is on top */
+      }
+
+      #drop-area {
+        width: 150px;
+        height: 150px;
+        border: 2px dashed;
+        position: relative;
+        margin-top: 20px;
+      }
+
+      #spawn-area {
+        width: 150px;
+        height: 150px;
+        border: 2px solid #000;
+        position: relative;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #deal-button {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Drag and Drop</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+        </div>
+      </div>
+    </div>
+    <table>
+      <thread>
+        <tr>
+          <th>
+            <button id="deal-button">Deal Card</button>
+            <div id="spawn-area">Spawn Area</div>
+            <div id="card">
+              <img
+                src="https://cop4813eaglin.pbworks.com/f/ClubsAce.png"
+                alt="Card"
+                style="width: 100%; height: 100%"
+                id="img"
+              />
+            </div>
+          </th>
+          <th>
+            <div id="drop-area">Drop Here</div>
+          </th>
+        </tr>
+      </thread>
+    </table>
+
+    <script">
+const card = document.getElementById('card');
+const img = document.getElementById('img');
+const dropArea = document.getElementById('drop-area');
+const spawnArea = document.getElementById('spawn-area');
+const dealButton = document.getElementById('deal-button');
+
+// Variables to store the offset and dragging state
+let isDragging = false;
+let offsetX, offsetY;
+
+var cardsInDeck = new Array();
+var numberOfCardsInDeck = 5;
+cardsInDeck[0] = "AceHearts";
+cardsInDeck[1] = "Clubs2";
+cardsInDeck[2] = "ClubsAce";
+cardsInDeck[3] = "DiamondsKing";
+cardsInDeck[4] = "SpadesJack";
+
+// Function to deal a card
+function dealCard() {
+    // Get the spawn area dimensions and position
+    const spawnAreaRect = spawnArea.getBoundingClientRect();
+    const cardWidth = card.offsetWidth;
+    const cardHeight = card.offsetHeight;
+
+    // Calculate position to center the card in the spawn area
+    const centerX = spawnAreaRect.left + (spawnAreaRect.width - cardWidth) / 2;
+    const centerY = spawnAreaRect.top + (spawnAreaRect.height - cardHeight) / 2;
+    
+    img.src = "https://cop4813eaglin.pbworks.com/f/" + cardsInDeck[Math.floor(Math.random() * numberOfCardsInDeck)] + ".png";
+
+    card.style.left = `${centerX}px`;
+    card.style.top = `${centerY}px`;
+    card.style.display = 'block'; // Show the card
+
+    // Enable dragging after the card is dealt
+    enableDragging();
+}
+
+// Function to enable dragging
+function enableDragging() {
+    card.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - card.getBoundingClientRect().left;
+        offsetY = e.clientY - card.getBoundingClientRect().top;
+
+        // Set mousemove and mouseup event listeners on the document
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    });
+}
+
+// Handle mouse move
+function mouseMoveHandler(e) {
+    if (isDragging) {
+        card.style.left = `${e.clientX - offsetX}px`;
+        card.style.top = `${e.clientY - offsetY}px`;
+    }
+}
+
+// Handle mouse up
+function mouseUpHandler() {
+    // Always clean up event listeners
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+    
+    if (isDragging) {
+        isDragging = false;
+
+        // Get the dimensions and positions of the drop area and card
+        const dropAreaRect = dropArea.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        // Calculate the intersection width and height
+        const intersectionWidth = Math.max(0, Math.min(cardRect.right, dropAreaRect.right) - Math.max(cardRect.left, dropAreaRect.left));
+        const intersectionHeight = Math.max(0, Math.min(cardRect.bottom, dropAreaRect.bottom) - Math.max(cardRect.top, dropAreaRect.top));
+        
+        const intersectionArea = intersectionWidth * intersectionHeight; // Area of intersection
+        const cardArea = cardRect.width * cardRect.height; // Total area of the card
+        const requiredArea = cardArea * 0.80; // 80% of the card area
+
+        // Check if at least 85% of the card is inside the drop area
+        if (intersectionArea >= requiredArea) {
+            alert("Card dropped in the spot!");
+        }
+    }
+}
+
+// Add event listener to the deal button
+dealButton.addEventListener('click', dealCard);
+
+</script>
+  </body>
+</html>
