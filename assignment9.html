@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      #icon {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 100px;
+        width: 100px;
+        mask: url("https://upload.wikimedia.org/wikipedia/commons/2/2b/Black_Cat_Vector.svg");
+        -webkit-mask: url("https://upload.wikimedia.org/wikipedia/commons/2/2b/Black_Cat_Vector.svg");
+        background-repeat: no-repeat;
+        background-size: 75px;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Drag and Drop</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+
+          <a href="assignment6.html" style="margin-top: 20px; display: block"
+            >Assignment6</a
+          >
+
+          <a href="assignment7.html" style="margin-top: 20px; display: block"
+            >Assignment7</a
+          >
+        </div>
+      </div>
+    </div>
+    <div onclick="color()" id="bounce">
+      <div id="icon"></div>
+    </div>
+
+    <script>
+      function dropdown() {
+        document.getElementById("myDropdown").classList.toggle("show")
+      }
+
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          var myDropdown = document.getElementById("myDropdown")
+          if (myDropdown.classList.contains("show")) {
+            myDropdown.classList.remove("show")
+          }
+        }
+      }
+
+      let x = 0,
+        y = 0,
+        dirX = 1,
+        dirY = 1
+      const speed = 2
+      const pallete = ["#c1210b", "#99d398", "#06287b", "#bea9d7"]
+      let icon = document.getElementById("icon")
+      icon.style.backgroundColor = pallete[0]
+      let prevColorChoiceIndex = 0
+      let black = document.getElementById("black")
+      const iconWidth = icon.clientWidth - 15
+      const iconHeight = icon.clientHeight - 15
+      let colorChoice = pallete[0]
+
+      function color() {
+        const currentPallete = [...pallete]
+        currentPallete.splice(prevColorChoiceIndex, 1)
+        const colorChoiceIndex = Math.floor(
+          Math.random() * currentPallete.length,
+        )
+        prevColorChoiceIndex =
+          colorChoiceIndex < prevColorChoiceIndex
+            ? colorChoiceIndex
+            : colorChoiceIndex + 1
+        colorChoice = currentPallete[colorChoiceIndex]
+        icon.style.backgroundColor = colorChoice
+      }
+      function animate() {
+        const screenHeight = document.body.clientHeight
+        const screenWidth = document.body.clientWidth
+
+        if (y + iconHeight >= screenHeight || y < 0) {
+          dirY *= -1
+        }
+        if (x + iconWidth >= screenWidth || x < 0) {
+          dirX *= -1
+        }
+        x += dirX * speed
+        y += dirY * speed
+        icon.style.left = x + "px"
+        icon.style.top = y + "px"
+        window.requestAnimationFrame(animate)
+      }
+
+      window.requestAnimationFrame(animate)
+
+      // Add event listener to the deal button
+      dealButton.addEventListener("click", dealCard)
+    </script>
+  </body>
+</html>
