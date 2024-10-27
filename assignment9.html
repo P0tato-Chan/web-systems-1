@@ -6,7 +6,10 @@
     <title>Assignments</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
-      
+      #bounce {
+        height: 100vh;
+        width: 100vw;
+      }
       #icon {
         position: absolute;
         left: 0px;
@@ -102,8 +105,8 @@
         icon.style.backgroundColor = colorChoice
       }
       function animate() {
-        const screenHeight = window.innerHeight;
-        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight
+        const screenWidth = window.innerWidth
 
         if (y + iconHeight >= screenHeight || y < 0) {
           dirY *= -1
