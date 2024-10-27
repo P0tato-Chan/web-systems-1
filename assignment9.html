@@ -107,17 +107,34 @@
       function animate() {
         const screenHeight = window.innerHeight
         const screenWidth = window.innerWidth
+        const headerHeight = document.querySelector("header").offsetHeight
+        const navbarHeight = document.querySelector(".navbar").offsetHeight
+        const combinedHeight = headerHeight + navbarHeight
+        const iconHeight = icon.clientHeight
+        const iconWidth = icon.clientWidth
 
-        if (y + iconHeight >= screenHeight || y < 0) {
+        if (y + iconHeight >= screenHeight) {
           dirY *= -1
+          y = screenHeight - iconHeight
         }
-        if (x + iconWidth >= screenWidth || x < 0) {
+        if (y < combinedHeight) {
+          dirY *= -1
+          y = combinedHeight
+        }
+        if (x + iconWidth >= screenWidth) {
           dirX *= -1
+          x = screenWidth - iconWidth
         }
+        if (x < 0) {
+          dirX *= -1
+          x = 0
+        }
+
         x += dirX * speed
         y += dirY * speed
         icon.style.left = x + "px"
         icon.style.top = y + "px"
+
         window.requestAnimationFrame(animate)
       }
 
