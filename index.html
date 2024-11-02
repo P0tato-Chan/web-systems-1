@@ -28,7 +28,7 @@
          </div>
     </div>
     <main>
-        <img src="cat.jpg" alt="cat" style="max-width: 70%; height: auto;">
+        <img id="catImg" src="cat.jpg" alt="cat" style="width: 30%; height: auto;">
     </main>
     <footer>
         <p>Created by Renzie Davidson for ​COP ​4813​ 521F</p>
@@ -48,6 +48,17 @@ window.onclick = function(e) {
       myDropdown.classList.remove('show');
     }
   }
+}
+
+var catImg = document.getElementById('catImg');
+let details = navigator.userAgent; 
+let regexp = /android|iphone|kindle|ipad/i; 
+let isMobileDevice = regexp.test(details); 
+  
+if (isMobileDevice) { 
+    catImg.style.width = '70%'
+} else { 
+    catImg.style.hight = '30%'
 }
 </script>
 </body>
