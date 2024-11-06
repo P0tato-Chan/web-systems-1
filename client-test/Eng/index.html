@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delicious Bakery</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      img {
+        max-width: 100%;
+      }
+      .image {
+        flex-basis: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay">
+      <a href="../Ara/index.html" style="color: #ffffff">Eng/Ara</a>
+    </div>
+    <header>
+      <div class="logo">
+        <h1>Alnour Bakery</h1>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="links">
+        <nav>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="Menu.html">Our Menu</a></li>
+            <li><a href="OrderOnline.html">Online Orders</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <main>
+      <section class="banner">
+        <div class="banner-content">
+          <h2>Freshly Baked, Everyday!</h2>
+          <p>
+            Come experience the warmth of freshly baked bread, cakes, and
+            pastries.
+          </p>
+          <button onclick="location.href='OrderOnline.html'">Order Now</button>
+        </div>
+      </section>
+
+      <!-- About Us Section -->
+      <section id="about" class="about">
+        <h2>About Us</h2>
+        <div class="container">
+          <p>
+            At Delicious Bakery, we pride ourselves on creating artisan breads,
+            cakes, and pastries from the finest ingredients. Family-owned and
+            operated, we’ve been serving up smiles for over 10 years!
+          </p>
+          <div class="image">
+            <img
+              src="https://i.pinimg.com/originals/26/ea/fc/26eafc0b14488fea03fa8fa9751203ff.jpg"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu Section 
+    <section id="menu" class="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-items">
+            <div class="item">
+                <h3>Fresh Croissants</h3>
+                <p>Flaky and buttery, straight from the oven.</p>
+            </div>
+            <div class="item">
+                <h3>Chocolate Cake</h3>
+                <p>Rich, moist chocolate cake with a velvety ganache.</p>
+            </div>
+            <div class="item">
+                <h3>Sourdough Bread</h3>
+                <p>Perfectly tangy with a crispy crust.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+      <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action="mailto:recipient@example.com">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+      <!-- Footer Section -->
+      <footer>
+        <p>© 2024 Delicious Bakery | All rights reserved.</p>
+      </footer>
+    </main>
+    <!-- JavaScript -->
+    <script src="scripts.js"></script>
+  </body>
+</html>
+
