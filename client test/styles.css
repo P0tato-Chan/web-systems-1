@@ -50,9 +50,6 @@ nav ul li a:hover {
 }
 
 .banner {
-  background-image: url("https://www.example.com/bakery-banner.jpg");
-  background-size: cover;
-  background-position: center;
   height: 400px;
   display: flex;
   justify-content: center;
