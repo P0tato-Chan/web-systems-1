@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      <style>
+      .collapsible {
+        color: #333;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+      }
+
+      .active,
+      .collapsible:hover {
+        background-color: #555;
+      }
+
+      .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Animation</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+
+          <a href="assignment6.html" style="margin-top: 20px; display: block"
+            >Assignment6</a
+          >
+
+          <a href="assignment7.html" style="margin-top: 20px; display: block"
+            >Assignment7</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="collapsible">Taken classes</button>
+    <div class="content">
+      <div id="taken">
+       
+      </div>
+    </div>
+    <button type="button" class="collapsible">Class Options</button>
+    <div class="content">
+      Select the semester for the classes 
+      <select name="Season" id="season">
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
+        <option value="Fall">Fall</option>
+      </select>
+      <button id=update onclick="updateOptions()">Update Class options</button>
+      <div id= "seasonClass">
+      </div>
+    </div>
+    <button type="button" class="collapsible">Cart</button>
+    <div class="content">
+      <p id= "cartTotal">Selected class: </p>
+    </div>
+  </body>
+  <script>
+    var coll = document.getElementsByClassName("collapsible")
+    var i
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        this.classList.toggle("active")
+        var content = this.nextElementSibling
+        if (content.style.display === "block") {
+          content.style.display = "none"
+        } else {
+          content.style.display = "block"
+        }
+      })
+    }
+
+    var courselist = [
+  {
+    Course: "MAC1105",
+    Name: "College Algebra",
+    PRMet: true,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "Students should take MAC1105 as a pre-requisite for admission into the program",
+  },
+  {
+    Course: "MAC1114",
+    Name: "Trigonometry",
+    PreReq: ["MAC1105"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details: "Taken as a pre-requisite to the MAC2311 Calculus requirement",
+  },
+  {
+    Course: "MAC1140",
+    Name: "Pre-Calculus",
+    PreReq: ["MAC1105"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details: "Taken as a pre-requisite to the MAC2311 Calculus requirement",
+  },
+  {
+    Course: "MAC2311",
+    Name: "Calculus",
+    PreReq: ["MAC1140", "MAC1114"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 4,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "MAC2311 C or higher is a graduation requirement, can also sub EGN2045",
+  },
+  {
+    Course: "STA2023",
+    Name: "Statistics",
+    PreReq: ["MAC1105"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details: "Available every semester",
+  },
+  {
+    Course: "COT3100",
+    Name: "Discrete Analaysis",
+    PreReq: ["MAC1105"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall",
+    details:
+      "Students may take COT3100 or MAD2104 or other class in discrete analysis to fulfill this requirement",
+  },
+  {
+    Course: "COP1000",
+    Name: "Principles of Programming",
+    PRMet: true,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "This is the first class in the programming pre-requisite requirement",
+  },
+  {
+    Course: "Programming",
+    Name: "C based Programming",
+    PreReq: ["COP1000"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "Any C Based programming course such as COP2220, COP2001, COP2800, or COP2360 will fulfill this requirement",
+  },
+  {
+    Course: "CTS3348",
+    Name: "Linux Administration",
+    PreReq: ["COP1000"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details: "CTS2321 or CTS3348 will fulfill this pre-requisite requirement",
+  },
+  {
+    Course: "CET3116",
+    Name: "Digital Technology",
+    PreReq: ["MAC1105"],
+    PRMet: false,
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "A class in digital technology such as CET3116 or CET1112 will fulfill this pre-requisite requirement",
+  },
+  {
+    Course: "EET3086",
+    Name: "Electrical Circuits",
+    PreReq: ["MAC1114"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details:
+      "Students must complete on pre-requisite class in circuits such as EET1011, EET3085, EET3086, or PHY2049 before taking network classes",
+  },
+  {
+    Course: "ENC1101",
+    Name: "Composition",
+    PRMet: "true",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: false,
+    offered: "Spring, Fall, Summer",
+    details: "This course is part of the general education requirement",
+  },
+  {
+    Course: "GEB3213",
+    Name: "Business Writing",
+    PreReq: ["ENC1101"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details:
+      "Students may also fulfill this requirement using technical writing such as ENC2210",
+  },
+  {
+    Course: "CIS4250",
+    Name: "Ethics in Computing",
+    PreReq: ["GEB3213"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 1,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "This one hour course is usually offered with CNT3104",
+  },
+  {
+    Course: "COP3530",
+    Name: "Data Structures",
+    PreReq: ["COT3100", "Programming"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall",
+    details:
+      "This is the fundamental course used as a pre-requisite for other course in the program",
+  },
+  {
+    Course: "CEN3722",
+    Name: "Human Computer Interfaces",
+    PreReq: ["Programming"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Summer",
+    details: "Typically only offered in Summer and is a required course",
+  },
+  {
+    Course: "COP4708",
+    Name: "Applied Database",
+    PreReq: ["Programming"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "",
+  },
+  {
+    Course: "COP4610",
+    Name: "Operating Systems",
+    PreReq: ["CTS3348"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent courses: CET4505 ",
+  },
+  {
+    Course: "CIS4360",
+    Name: "Applied Cybersecurity",
+    PreReq: ["CTS3348"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details:
+      "This course is part of the Advanced Technical Certificate in Cyberforensics",
+  },
+  {
+    Course: "CNT3104",
+    Name: "Introduction to Telecom",
+    PreReq: ["EET3086"],
+    PRMet: "false",
+    semester: 0,
+    taken: false,
+    hours: 2,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent Courses: CET3383",
+  },
+  {
+    Course: "CNT4007",
+    Name: "Data Communications",
+    PreReq: ["CNT3104"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent Courses: CET4483",
+  },
+  {
+    Course: "CNT4703",
+    Name: "Voice/Data Networks",
+    PreReq: ["CNT4007"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent Courses: CET4748",
+  },
+  {
+    Course: "CDA4101",
+    Name: "Computer Organization and Design",
+    PreReq: ["CET3116"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent Courses: CET4333",
+  },
+  {
+    Course: "CEN4801",
+    Name: "Systems Integration",
+    PreReq: ["COP3530"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall",
+    details: "Equivalent Courses: CET3010",
+  },
+  {
+    Course: "CEN4010",
+    Name: "Software Engineering",
+    PreReq: ["COP3530"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Spring, Fall, Summer",
+    details: "Equivalent Courses: CET3383",
+  },
+  {
+    Course: "COP4813",
+    Name: "Web Systems I",
+    PreReq: ["COP3530"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: true,
+    program: true,
+    offered: "Fall",
+    details: "Note - this required course is offered Fall only",
+  },
+  {
+    Course: "COP4709",
+    Name: "Applied Database II",
+    PreReq: ["COP4708"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Spring",
+    details:
+      "This is an elective course that is part of the web systems specialization",
+  },
+  {
+    Course: "COP4834",
+    Name: "Web Systems II",
+    PreReq: ["COP4813", "COP4708"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Spring",
+    details:
+      "This is an elective course that is part of the web systems specialization",
+  },
+  {
+    Course: "CIS4360",
+    Name: "Project Management in IT",
+    PreReq: ["CEN4010"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Fall",
+    details:
+      "This is an elective course that is part of the web systems specialization, Equivalent Courses: CET4663",
+  },
+  {
+    Course: "CET4884",
+    Name: "Security Methods and Practices",
+    PreReq: ["CIS4360"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Fall, Summer",
+    details:
+      "This is an elective course that is part of the cybersecurity and cyberforensics specialization",
+  },
+  {
+    Course: "CET4860",
+    Name: "Introdcution to Digital Forensics",
+    PreReq: ["CIS4360"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Spring, Fall",
+    details:
+      "This is an elective course that is part of the web systems specialization",
+  },
+  {
+    Course: "CET4861",
+    Name: "Advanced Digital Forensics",
+    PreReq: ["CET4860"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Fall, Summer",
+    details:
+      "This is an elective course that is part of the web systems specialization",
+  },
+  {
+    Course: "CET4862",
+    Name: "Ntwrk Forensics Incident Response",
+    PreReq: ["CET4860"],
+    PRMet: "false",
+    taken: false,
+    semester: 0,
+    hours: 3,
+    required: false,
+    program: true,
+    offered: "Spring, Fall",
+    details:
+      "This is an elective course that is part of the web systems specialization",
+  },
+]
+
+var preReq2 = []
+
+// Assuming 'courselist' is an array of course objects, and each course has a 'PreReq' array
+for (const index in courselist) {
+  var course = courselist[index] // Get the current course object
+
+  // Initialize prerequisiteMet as true (assuming prerequisites are met initially)
+  let prerequisiteMet = true
+
+  // Check if the course has a 'PreReq' field and if it contains prerequisites
+  if (course.PreReq && course.PreReq.length > 0) {
+    // Iterate over each prerequisite in the 'PreReq' array
+    for (let prereqCourseCode of course.PreReq) {
+      // Find the prerequisite course in the list
+      let prereqCourse = courselist.find((c) => c.Course === prereqCourseCode)
+      if (prereqCourse && !prereqCourse.taken) {
+        prerequisiteMet = false // If any prerequisite is not taken, set prerequisiteMet to false
+        break // No need to check further, the prerequisite is not met
+      }
+    }
+  }
+
+  // Create a button for the course
+  var element = document.createElement("button")
+  element.textContent = course.Course
+  element.id = course.Course
+
+  // Set the color based on whether the prerequisites are met and whether the course is taken
+  if (!prerequisiteMet) {
+    element.style.backgroundColor = "red" // Prerequisite not met, set button to red
+  } else if (course.taken) {
+    element.style.backgroundColor = "green" // Course is taken, set button to green
+  } else {
+    element.style.backgroundColor = "" // Default color if no issues
+  }
+
+  // Add event listener for button click
+  element.addEventListener("click", function (event) {
+    const buttonName = event.target.innerText
+    const element2 = courselist.find((item) => item.Course === buttonName)
+    if (element2.PRMet == true || element2.PRMet == "true") {
+      document.getElementById(buttonName).style.backgroundColor = "green"
+      element2.taken = true
+      preReq2.push(element2.Course)
+      updateEle()
+      console.log(element2.taken)
+    } else {
+      alert("pre-requisites not meet")
+    }
+  })
+
+  // Append the button to the page (within the "taken" container)
+  var page = document.getElementById("taken")
+  page.appendChild(element)
+}
+
+function updateEle() {
+  // Iterate through all courses and check prerequisites
+  for (const item of courselist) {
+    if (item.PreReq && item.PreReq.length > 0) {
+      for (const item2 of preReq2) {
+        if (item.PreReq.includes(item2)) {
+          item.PRMet = true // Mark prerequisite as met
+
+          // Only update the button color if it's still red (prerequisite was previously not met)
+          const button = document.getElementById(item.Course)
+          if (button && button.style.backgroundColor === "red") {
+            button.style.backgroundColor = "" // Reset to default color
+          }
+        }
+      }
+    }
+  }
+}
+
+var cart = []
+
+function updateOptions() {
+	document.getElementById("seasonClass").innerHTML = "";
+  document.getElementById("cartTotal").innerHTML = "Selected class: ";
+  cart = [];
+	const season = document.getElementById("season").value;
+  for (const index in courselist) {
+    var course = courselist[index];
+
+    if (course.PRMet && course.taken != true && course.offered.includes(season)) {
+      var element = document.createElement("button");
+      element.textContent = course.Course;
+      element.id = course.Course + "2";
+
+      element.addEventListener("click", function (event) {
+        const buttonName = event.target.innerText;
+        const element2 = courselist.find((item) => item.Course === buttonName);
+        if (document.getElementById(buttonName + "2").style.backgroundColor == "") {
+          document.getElementById(buttonName + "2").style.backgroundColor = "green";
+          cart.push(buttonName);
+        } else if (document.getElementById(buttonName + "2").style.backgroundColor == "green") {
+          document.getElementById(buttonName + "2").style.backgroundColor = "";
+          const index2 = cart.indexOf(buttonName);
+          cart.splice(index2, 1);
+        }
+        const cartTotalElement = document.getElementById("cartTotal");
+        if (cartTotalElement) {
+          cartTotalElement.textContent = "Selected class: " + cart.join(", ");
+        } else {
+          console.error("cartTotal element not found");
+        }
+      })
+      var page = document.getElementById("seasonClass")
+      page.appendChild(element);
+    }
+  }
+}
+
+    
+    </script>
+  </body>
+</html>
