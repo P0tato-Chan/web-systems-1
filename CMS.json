@@ -1,42 +1,42 @@
 [
   {
-    System: "Drupal",
-    Produced: "Open-Source",
-    technologyBase: "PHP/MySQL",
-    majorCapabilities: "Community features, High security",
-    majorLimitations: "Requires Technical Expertise, Complex User Interface",
-    exampleStie: "https://www.drupal.org/",
+    "System": "Drupal",
+    "Produced": "Open-Source",
+    "technologyBase": "PHP/MySQL",
+    "majorCapabilities": "Community features, High security",
+    "majorLimitations": "Requires Technical Expertise, Complex User Interface",
+    "exampleStie": "https://www.drupal.org/"
   },
   {
-    System: "Joomla",
-    Produced: "Open-Source",
-    technologyBase: "PHP/MySQL",
-    majorCapabilities: "Advance CMS features",
-    majorLimitations: "Steep learning curve, Smaller community",
-    exampleStie: "https://www.joomla.org/",
+    "System": "Joomla",
+    "Produced": "Open-Source",
+    "technologyBase": "PHP/MySQL",
+    "majorCapabilities": "Advanced CMS features",
+    "majorLimitations": "Steep learning curve, Smaller community",
+    "exampleStie": "https://www.joomla.org/"
   },
   {
-    System: "Kentico",
-    Produced: "Kentico",
-    technologyBase: ".NET/C#",
-    majorCapabilities: "Multiple websites from a common CMS",
-    majorLimitations: "Cost/Licensing, Overkill for small sites, E-commerce complexity",
-    exampleStie: "https://www.kentico.com/",
+    "System": "Kentico",
+    "Produced": "Kentico",
+    "technologyBase": ".NET/C#",
+    "majorCapabilities": "Multiple websites from a common CMS",
+    "majorLimitations": "Cost/Licensing, Overkill for small sites, E-commerce complexity",
+    "exampleStie": "https://www.kentico.com/"
   },
   {
-    System: "Sitecore",
-    Produced: "Sitecore",
-    technologyBase: ".NET/C#",
-    majorCapabilities: "Digital Asset Management",
-    majorLimitations: "Performance and Deployment problems",
-    exampleStie: "https://www.sitecore.com/",
+    "System": "Sitecore",
+    "Produced": "Sitecore",
+    "technologyBase": ".NET/C#",
+    "majorCapabilities": "Digital Asset Management",
+    "majorLimitations": "Performance and Deployment problems",
+    "exampleStie": "https://www.sitecore.com/"
   },
   {
-    System: "Adobe Experience Manager",
-    Produced: "Adobe",
-    technologyBase: "Java/Apache Sling",
-    majorCapabilities: "Multi-channel Delivery",
-    majorLimitations: "Limited flexibility, Integration complexity",
-    exampleStie: "https://business.adobe.com/products/experience-manager/adobe-experience-manager.html",
+    "System": "Adobe Experience Manager",
+    "Produced": "Adobe",
+    "technologyBase": "Java/Apache Sling",
+    "majorCapabilities": "Multi-channel Delivery",
+    "majorLimitations": "Limited flexibility, Integration complexity",
+    "exampleStie": "https://business.adobe.com/products/experience-manager/adobe-experience-manager.html"
   }
 ]
