@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Example</title>
+    <script type="text/javascript" src="audiosynth.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="piano-container">
+            <ul class="piano-keys-list">
+                <li class="piano-keys white-key" data_key="C"></li>
+                <li class="piano-keys black-key" data_key="02"></li>
+                <li class="piano-keys white-key" data_key="03"></li>
+                <li class="piano-keys black-key" data_key="04"></li>
+                <li class="piano-keys white-key" data_key="05"></li>
+                <li class="piano-keys black-key" data_key="06"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+Synth instanceof AudioSynth;
+
+// Select all piano keys
+const keys = document.querySelectorAll('.piano-key');
+
+// Create the piano instrument
+var piano = Synth.createInstrument('piano');
+
+// Add click event listener to each key
+keys.forEach((key) => {
+    key.addEventListener('click', (e) => {
+        // Retrieve the note and octave from the clicked key's dataset
+        const note = e.target.dataset.data-key; // E.g., "C", "D", "E"
+        
+        // Play the note
+        if (note) {
+            piano.play(note, 4, 2); // Play note with 2 seconds duration
+        }
+    });
+});
+
+</script>
+</body>
+
+</html>
