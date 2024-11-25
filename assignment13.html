@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             key.addEventListener('click', (e) => {
                 const note = e.target.dataset.key; // Corrected attribute
                 if (note) {
-                    piano.play(note, 4, 2);
+                    piano.play('C', 4, 2);
                 }
             });
         });
