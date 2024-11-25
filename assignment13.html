@@ -158,25 +158,25 @@ body {
     </div>
 
     <script>
-Synth instanceof AudioSynth;
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof Synth !== 'undefined') {
+        console.log('Synth loaded successfully');
+        Synth instanceof AudioSynth;
 
-// Select all piano keys
-const keys = document.querySelectorAll('.piano-key');
+        const keys = document.querySelectorAll('.piano-key');
+        const piano = Synth.createInstrument('piano');
 
-// Create the piano instrument
-var piano = Synth.createInstrument('piano');
-
-// Add click event listener to each key
-keys.forEach((key) => {
-    key.addEventListener('click', (e) => {
-        // Retrieve the note and octave from the clicked key's dataset
-        const note = e.target.dataset.data-key; // E.g., "C", "D", "E"
-        
-        // Play the note
-        if (note) {
-            piano.play(note, 4, 2); // Play note with 2 seconds duration
-        }
-    });
+        keys.forEach((key) => {
+            key.addEventListener('click', (e) => {
+                const note = e.target.dataset.key; // Corrected attribute
+                if (note) {
+                    piano.play(note, 4, 2);
+                }
+            });
+        });
+    } else {
+        console.error('Synth is not defined. Check your script inclusion.');
+    }
 });
 
 </script>
