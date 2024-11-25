@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const note = e.target.dataset.key; // Corrected attribute
                 if (note) {
                     piano.play('C', 4, 2);
+                    console.log('note');
                 }
             });
         });
