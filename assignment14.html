@@ -89,11 +89,12 @@
 <button id="generate" onclick="playAgain()">play again</button><br>
 Difficulty: <button id="easy" onclick="difficulty(3)">Easy</button> <button id="medium" onclick="difficulty(4)">Medium</button> <button id="hard" onclick="difficulty(5)">Hard</button>
 <div id="difficulty")>Difficulty: 3</div>
-<div>Attempt: </div><div id="result"></div>
+<div>Attempt History: </div><div id="result"></div>
     
 	</th>
 	<th>
 		<div class="container">
+			Current attempt:
 	<p id="current"></p>
         <div class="piano-container">
             <ul class="piano-keys-list">
@@ -143,7 +144,7 @@ Difficulty: <button id="easy" onclick="difficulty(3)">Easy</button> <button id="
                         if (note) {
                             piano.play(note, 4, 2); // Play the note
 			attempt.push(note);
-			document.getElementById("current").innerHTML += "◘";
+			document.getElementById("current").innerHTML += "•";
 				if (attempt.length == diff){
 				temp.length = 0
 				document.getElementById("current").innerHTML = ""
