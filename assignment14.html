@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Final Draft</title>
+    <script type="text/javascript" src="audiosynth.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .piano-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .piano-keys-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        .piano-keys {
+            width: 5rem;
+            cursor: pointer;
+            position: relative;
+            height: 20rem;
+            border-radius: 10px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        .white-key {
+            background-color: #fff;
+        }
+        .black-key {
+            width: 3rem;
+            height: 13rem;
+            border-radius: 5px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: #000;
+            z-index: 2;
+            margin: 0 -20px 0 -20px;
+            color: white;
+        }
+    </style>
+</head>
+  <header>
+        <h1>Assignment13: Game</h1>
+    </header>
+    <div class="navbar">
+        <a href="index.html" style="display: block;">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="dropdown()">Web systems 1 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block">Assignment2</a>
+          <a href="assignment3.html" style="margin-top: 20px; display: block">Assignment3</a>
+          <a href="assignment4.html" style="margin-top: 20px; display: block">Assignment4</a>
+          <a href="assignment5.html" style="margin-top: 20px; display: block">Assignment5</a>
+          <a href="assignment6.html" style="margin-top: 20px; display: block">Assignment6</a>
+          <a href="assignment7.html" style="margin-top: 20px; display: block">Assignment7</a>
+        </div>
+        </div>
+    </div>
+<body>
+<table>
+<tr>
+	<th align="left">
+		<div>Genreate a tune, then use the keyboard to replicate the 5 note tune</div>
+		<div>Attempt Key:</div>
+		<div>◙ = Correct note in correct spot</div>
+		<div>◘ = Correct note in Wrong spot</div>
+		<div>○ = Wrong note</div>
+    <button id="generate" onclick="generate()">generate tune</button>
+<button id="generate" onclick="playAgain()">play again</button><br>
+Difficulty: <button id="easy" onclick="difficulty(3)">Easy</button> <button id="medium" onclick="difficulty(4)">Medium</button> <button id="hard" onclick="difficulty(5)">Hard</button>
+<div id="difficulty")>Difficulty: 3</div>
+<div>Attempt: </div><div id="result"></div>
+    
+	</th>
+	<th>
+		<div class="container">
+	<p id="current"></p>
+        <div class="piano-container">
+            <ul class="piano-keys-list">
+                <li class="piano-keys white-key" data-key="C">C</li>
+                <li class="piano-keys black-key" data-key="C#">C#</li>
+                <li class="piano-keys white-key" data-key="D">D</li>
+                <li class="piano-keys black-key" data-key="D#">D#</li>
+                <li class="piano-keys white-key" data-key="E">E</li>
+                <li class="piano-keys black-key" data-key="F">F</li>
+            </ul>
+        </div>
+      </div>
+	</th>
+	<th align="left" style="padding-left: 80px;">
+	<div>Change Log:</div>
+	<div>• Added labels to keys</div>
+	<div>• Added difficulties</div>
+	<div>• Added attempt logs</div>
+	<div>• Added note checking on attempts</div>
+	</th>
+</tr>
+</table>
+	
+
+    <script>
+        const options = ["C", "C#", "D", "D#", "E", "F"];
+        const test = [];
+	const attempt = [];
+	const temp = []
+        var diff = 3;
+        let piano;
+	
+	function difficulty(a){
+		diff = a;
+		document.getElementById("difficulty").textContent = "Difficulty: " + a;
+	}
+        // Ensure the script loads only after DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof Synth !== 'undefined') {
+                console.log('Synth loaded successfully');
+                piano = Synth.createInstrument('piano');
+                const keys = document.querySelectorAll('.white-key, .black-key');
+
+                keys.forEach((key) => {
+                    key.addEventListener('click', (e) => {
+                        const note = e.target.dataset.key; // Fetch the correct note
+                        if (note) {
+                            piano.play(note, 4, 2); // Play the note
+			attempt.push(note);
+			document.getElementById("current").innerHTML += "◘";
+				if (attempt.length == diff){
+				temp.length = 0
+				document.getElementById("current").innerHTML = ""
+				if (test.toString() === attempt.toString()){
+				document.getElementById("result").innerHTML += "Correct, attempts reset <br>";
+				}else{
+				for(var i = 0; i < attempt.length; i++){
+					if(test.includes(attempt[i])){
+						if(attempt[i] == test[i]){
+							temp.push("◙");
+						}else{
+							temp.push("◘");
+						}
+				}else{
+					temp.push("○");
+				}
+				}
+				document.getElementById("result").innerHTML += temp + "<br>";
+				}
+				attempt.length = 0;
+				document.getElementById("current").innerHTML = "";
+				}
+                            console.log(`Played note: ${note}`);
+                        }
+                    });
+                });
+            } else {
+                console.error('Synth is not defined. Check your script inclusion.');
+            }
+        });
+
+	// Helper function for delay
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function generate() {
+            if (!piano) {
+                console.error('Piano is not initialized.');
+                return;
+            }
+		test.length = 0;
+           	document.getElementById("result").innerHTML = "";
+            for (let i = 0; i < diff; i++) {
+                const random = Math.floor(Math.random() * options.length);
+                const note = options[random];
+                test.push(note);
+                await wait(800); // Delay for 800ms
+                piano.play(note, 4, 2); // Play the note
+            }
+            console.log(test);
+        }
+	async function playAgain(){
+	for (let i = 0; i <test.length; i++){
+	const note = test[i];
+	await wait(800); // Delay for 800ms
+        piano.play(note, 4, 2); // Play the note
+}
+}
+    </script>
+</body>
+</html>
