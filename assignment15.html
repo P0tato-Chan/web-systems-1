@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspective</title>
+     <style>
+       
+    </style>
+</head>
+<body>
+  <header>
+      <h1>Introspective</h1>
+    </header>
+    <div class="navbar">
+      <a href="index.html" style="display: block">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="dropdown()">
+          Web systems 1
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="assignment2.html" style="margin-top: 20px; display: block"
+            >Assignment2</a
+          >
+          <a href="assignment3.html" style="margin-top: 20px; display: block"
+            >Assignment3</a
+          >
+          <a href="assignment4.html" style="margin-top: 20px; display: block"
+            >Assignment4</a
+          >
+          <a href="assignment5.html" style="margin-top: 20px; display: block"
+            >Assignment5</a
+          >
+
+          <a href="assignment6.html" style="margin-top: 20px; display: block"
+            >Assignment6</a
+          >
+
+          <a href="assignment7.html" style="margin-top: 20px; display: block"
+            >Assignment7</a
+          >
+        </div>
+      </div>
+    </div>
+  This class helped familiarize me with HTML, CSS, and JavaScript. These skills are developed and became more comfortable with the introduction of new skills such as plotting, json information, animation, and dynamic websites. Then before any code developing skills we have also have had an introduction with registering a domain and hosting a site.
+
+Jobs in the industry for web developers have quite a bit of overlap with the skills touched on in the class. Though some notable skills that could be useful to still learn could be database systems like SQL or some more advanced programming languages like C#. Something else that may be useful to be familiar with is using and accessing API’s.
+
+To become more familiar with those skills that may be useful I could continue the education through classes that cover more advance material. Another option could be to simply experiment on my own and use online resources or videos to learn.
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function dropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+
+var catImg = document.getElementById('catImg');
+let details = navigator.userAgent; 
+let regexp = /android|iphone|kindle|ipad/i; 
+let isMobileDevice = regexp.test(details); 
+  
+if (isMobileDevice) { 
+    catImg.style.width = '80%'
+} else { 
+    catImg.style.hight = '30%'
+}
+</script>
+</body>
+</html>
